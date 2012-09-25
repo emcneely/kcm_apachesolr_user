@@ -1,0 +1,1 @@
+{"ts":1348584680129,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"name = Apache Solr for Siebel Users\ndescription = Index user entity types into a solr core.\ndependencies[] = apachesolr\npackage = Search Toolkit\ncore = 7.x\n"]],"start1":0,"start2":0,"length1":0,"length2":156}]],"length":156}
