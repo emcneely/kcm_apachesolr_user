@@ -1,0 +1,5 @@
+name = Apache Solr for Siebel Users
+description = Index user entity types into a solr core.
+dependencies[] = apachesolr
+package = Search Toolkit
+core = 7.x
