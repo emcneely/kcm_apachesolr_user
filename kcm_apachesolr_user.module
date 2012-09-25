@@ -40,7 +40,7 @@ function kcm_apachesolr_index_user_solr_document(ApacheSolrDocument $document, $
                     siebel_contact
                     INNER JOIN siebel_account ON siebel_account.AccountRowId = siebel_contact.AccountRowId
                     INNER JOIN siebel_drupal_xref ON siebel_contact.ContactRowId = siebel_drupal_xref.ContactRowId
-                    WHERE siebel_drupal_xref.uid = :uid", array(':uid', => $account->uid))->fetchObject;
+                    WHERE siebel_drupal_xref.uid = :uid", array(':uid', => $account->uid))->fetchObject();
 
     if(empty($user)) {
         return;
