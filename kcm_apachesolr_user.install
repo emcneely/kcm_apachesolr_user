@@ -87,7 +87,7 @@ function kcm_apachesolr_user_enable() {
       'page_title' => 'KCM User Search',
       'settings' => $settings,
     );
-    db_insert('kcm_apachesolr_search_page')->fields($fields)->execute();
+    db_insert('apachesolr_search_page')->fields($fields)->execute();
   }
 
 
