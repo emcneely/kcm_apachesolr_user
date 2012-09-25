@@ -63,7 +63,6 @@ function kcm_apachesolr_index_user_solr_document(ApacheSolrDocument $document, $
 
   ////// KCM Custom SBL db columns ///////
   $document->uid = $user->uid;
-  $document->hs_cid = $user->cid;
   $document->ss_AccountRowId = $user->AccountRowId;
   $document->ss_ContactRowId = $user->ContactRowId;
   $document->ss_FirstName = $user->FirstName;
@@ -80,7 +79,6 @@ function kcm_apachesolr_index_user_solr_document(ApacheSolrDocument $document, $
   $document->ss_Gender = $user->Gender;
   $document->ss_MaritalStatus = $user->MaritalStatus;
   $document->hts_isprimary = $user->isprimary;
-  $document->hs_aid = $user->aid;
   $document->ss_AccountNumber = $user->AccountNumber;
   $document->ss_Name = $user->Name;
   $document->ss_AccountType = $user->AccountType;
@@ -97,7 +95,6 @@ function kcm_apachesolr_index_user_solr_document(ApacheSolrDocument $document, $
   $document->ss_PostalCode = $user->PostalCode;
   $document->ss_Country = $user->Country;
   $document->ss_BusinessName = $user->BusinessName;
-  $document->hs_xid = $user->xid;
   //$document->hs_created = $user->created;
   // $document->hs_changed = $user->changed;
   ///////////////////////////////////////////  
