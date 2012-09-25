@@ -62,29 +62,29 @@ function kcm_apachesolr_user_schema() {
  */
 function kcm_apachesolr_user_enable() {
   // Make sure the default core search page is installed.
-  $search_page = apachesolr_search_page_load('kcm_user_search');
+  $search_page = apachesolr_search_page_load('user_search');
   if (empty($search_page)) {
     // Add Default search page (core search)
     // This is a duplication from update_7004 but it is intended
     // so future changes are possible without breaking the update
     $settings = array(
       'fq' => array('entity_type:user'),
-      'kcm_apachesolr_search_custom_enable' => TRUE,
-      'kcm_apachesolr_search_search_type' => 'custom',
-      'kcm_apachesolr_search_per_page' => 10,
-      'kcm_apachesolr_search_browse' => 'browse',
-      'kcm_apachesolr_search_spellcheck' => TRUE,
-      'kcm_apachesolr_search_search_box' => TRUE,
+      'apachesolr_search_custom_enable' => TRUE,
+      'apachesolr_search_search_type' => 'custom',
+      'apachesolr_search_per_page' => 10,
+      'apachesolr_search_browse' => 'browse',
+      'apachesolr_search_spellcheck' => TRUE,
+      'apachesolr_search_search_box' => TRUE,
     );
     $settings = serialize($settings);
 
     $fields = array(
-      'page_id' => 'kcm_user_search',
-      'label' => 'KCM User Search',
-      'description' => 'KCM User Search',
-      'search_path' => 'search/kcm-user',
+      'page_id' => 'user_search',
+      'label' => 'User Search',
+      'description' => 'User Search',
+      'search_path' => 'search/user',
       'env_id' => 'solr',
-      'page_title' => 'KCM User Search',
+      'page_title' => 'User',
       'settings' => $settings,
     );
     db_insert('apachesolr_search_page')->fields($fields)->execute();
