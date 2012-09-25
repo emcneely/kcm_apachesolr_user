@@ -34,8 +34,17 @@ function kcm_apachesolr_user_status_callbackapachesolr_user_status_callback($use
  *   The type of entity we're dealing with.
  */
 function kcm_apachesolr_index_user_solr_document(ApacheSolrDocument $document, $account, $entity_type) {
+    
+  $user = db_query("SELECT * 
+                    FROM
+                    siebel_contact
+                    INNER JOIN siebel_account ON siebel_account.AccountRowId = siebel_contact.AccountRowId
+                    INNER JOIN siebel_drupal_xref ON siebel_contact.ContactRowId = siebel_drupal_xref.ContactRowId
+                    WHERE siebel_drupal_xref.uid = :uid", array(':uid', => $account->uid))->fetchObject;
 
-  $document->uid = $account->uid;
+    if(empty($user)) {
+        return;
+    }
 
   // Title is a required field.
   $document->label = apachesolr_clean_text(format_username($account));
@@ -52,6 +61,48 @@ function kcm_apachesolr_index_user_solr_document(ApacheSolrDocument $document, $
   $text = drupal_render($build);
 
   $document->content = apachesolr_clean_text($text);
+  
+    ////// KCM Custom SBL db columns ///////
+    $document->uid = $user->uid;
+    $document->hs_cid = $user->cid;
+    $document->ss_AccountRowId = $user->AccountRowId;
+    $document->ss_ContactRowId = $user->ContactRowId;
+    $document->ss_FirstName = $user->FirstName;
+    $document->ss_LastName = $user->LastName;
+    $document->ss_Prefix = $user->Prefix;
+    $document->ss_Suffix = $user->Suffix;
+    $document->ss_EmailAddress = $user->EmailAddress;
+    $document->ss_CellPhone = $user->CellPhone;
+    $document->ss_HomePhone = $user->HomePhone;
+    $document->ss_WorkPhone = $user->WorkPhone;
+    $document->ss_BestTimetoCall = $user->BestTimetoCall;
+    $document->ss_PreferredCommunications = $user->PreferredCommunications;
+    $document->ss_BirthDate = $user->BirthDate;
+    $document->ss_Gender = $user->Gender;
+    $document->ss_MaritalStatus = $user->MaritalStatus;
+    $document->hts_isprimary = $user->isprimary;
+    $document->hs_aid = $user->aid;
+    $document->ss_AccountNumber = $user->AccountNumber;
+    $document->ss_Name = $user->Name;
+    $document->ss_AccountType = $user->AccountType;
+    $document->ss_BusinesssName = $user->BusinesssName;
+    $document->ss_AccountStatus = $user->AccountStatus;
+    $document->ss_Relationship = $user->Relationship;
+    $document->ss_PrimaryContactId = $user->PrimaryContactId;
+    $document->ss_SecondaryContactId = $user->SecondaryContactId;
+    $document->ss_StreetAddress1 = $user->StreetAddress1;
+    $document->ss_StreetAddress2 = $user->StreetAddress2;
+    $document->ss_StreetAddress3 = $user->StreetAddress3;
+    $document->ss_City = $user->City;
+    $document->ss_State = $user->State;
+    $document->ss_PostalCode = $user->PostalCode;
+    $document->ss_Country = $user->Country;
+    $document->ss_BusinessName = $user->BusinessName;
+    $document->hs_xid = $user->xid;
+    $document->hs_created = $user->created;
+    $document->hs_changed = $user->changed;
+    
+    ///////////////////////////////////////////  
 
   $document->bs_status = $account->status;
   $document->created = apachesolr_date_iso($account->created);
